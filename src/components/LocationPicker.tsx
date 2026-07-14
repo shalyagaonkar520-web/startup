@@ -19,8 +19,11 @@ export default function LocationPicker() {
     if (!isLocationPickerOpen) {
       setSearchQuery('');
       setSearchResults([]);
+    } else if (!deliveryLocation && !isGeolocating) {
+      // Automatically request location access on startup
+      handleGeolocate();
     }
-  }, [isLocationPickerOpen]);
+  }, [isLocationPickerOpen, deliveryLocation]);
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
